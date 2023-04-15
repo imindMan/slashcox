@@ -13,8 +13,9 @@ import datetime
 import os
 from typing import List
 
-#os.getenv returns an empty string if the value is empty so it doesn't use the second argument
-def getenv(name: str, other: str=None) -> any:
+
+# os.getenv returns an empty string if the value is empty so it doesn't use the second argument
+def getenv(name: str, other: str = None) -> any:
     """Gets an environment variable
     [Args]:
         name (str): The name of the env variable
@@ -22,6 +23,7 @@ def getenv(name: str, other: str=None) -> any:
     """
     env = os.getenv(name)
     return env if env or other is None else other
+
 
 ### CONFIG DEFINITION ###
 class Config:
@@ -44,11 +46,10 @@ class Config:
     mysql_port: int = int(getenv("SLASHCOX_MYSQL_PORT", "3306"))
     mysql_user: str = getenv("SLASHCOX_MYSQL_USER", "root")
     mysql_password: str = getenv("SLASHCOX_MYSQL_PASSWORD", "")  # recommendaton :tf:
-    mysql_database: str = getenv(
-        "SLASHCOX_MYSQL_DATABASE", "discox"
-    )
+    mysql_database: str = getenv("SLASHCOX_MYSQL_DATABASE", "discox")
     starboard_channel: int = int(
         getenv("SLASHCOX_STARBOARD_CHANNEL", "0")
     )  # starboard channel
-    server_id: int = int(getenv("SLASHCOX_SERVER_ID", "1032277950416035930")) # imindworld server id
-
+    server_id: int = int(
+        getenv("SLASHCOX_SERVER_ID", "1032277950416035930")
+    )  # imindworld server id
