@@ -43,35 +43,31 @@
 
 
 #### IMPORT SOME NECESSARY LIBRARIES ###
-
 import discord
 from discord import app_commands
 
 from .config import Config
-
-### IMPORTANT VARIABLES ###
-config = Config()
-
-intents = discord.Intents.default()
-client = discord.Client(intents=intents)
-tree = app_commands.CommandTree(client)
+from .base import Client, Tree
 
 
-### COMMANDS: (temporary) ###
-@tree.command(
-    name="hello",
-    description="Greet to people :)))",
-    guild=discord.Object(id=config.server_id),
-)
-async def first_command(interaction):
-    await interaction.response.send_message("Hello!")
+def main():
+    ### IMPORTANT VARIABLES ###
+    config = Config()
+ 
+    client = Client(intents=discord.Intents.default()) 
+    tree = Tree(client)
+    client.init_tree(tree) 
 
+    @tree.command(
+            name="hello",
+            description="Greet to people",
+            guild=discord.Object(id=config.server_id),
+        )
+    
+    async def first_command(interaction):
+        await interaction.response.send_message("Hello!")
+   
+    client.run(config.token)
 
-### MAIN PART ###
-@client.event
-async def on_ready():
-    await tree.sync(guild=discord.Object(id=config.server_id))
-    print("Ready!")
-
-
-client.run(config.token)
+if __name__ == "__main__":
+    main()
