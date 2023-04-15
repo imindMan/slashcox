@@ -46,28 +46,28 @@
 import discord
 from discord import app_commands
 
-from .config import Config
 from .base import Client, Tree
+from .config import Config
 
 
 def main():
     ### IMPORTANT VARIABLES ###
     config = Config()
- 
-    client = Client(intents=discord.Intents.default()) 
+
+    client = Client(intents=discord.Intents.default())
     tree = Tree(client)
-    client.init_tree(tree) 
+    client.init_tree(tree)
 
     @tree.command(
-            name="hello",
-            description="Greet to people",
-            guild=discord.Object(id=config.server_id),
-        )
-    
+        name="hello",
+        description="Greet to people",
+        guild=discord.Object(id=config.server_id),
+    )
     async def first_command(interaction):
         await interaction.response.send_message("Hello!")
-   
+
     client.run(config.token)
+
 
 if __name__ == "__main__":
     main()
