@@ -29,7 +29,7 @@ def getenv(name: str, other: str = None) -> any:
 class Config:
     token: str = getenv("SLASHCOX_TOKEN")  # bot token
     report_channel_id: int = int(
-        os.getenv("SLASHCOX_REPORT_ID", "1064539181193375784")
+        getenv("SLASHCOX_REPORT_ID", "1064539181193375784")
     )  # mod role id
     mod_role_id: List[int] = [
         int(x) for x in getenv("SLASHCOX_MOD_ROLE_ID", "0").split(",")
