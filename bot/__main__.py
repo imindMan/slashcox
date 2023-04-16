@@ -2,7 +2,7 @@
 # Credit: from discox https://github.com/v1rbox/discox
 # Original author: @imindMan, discord: imindMan#8536
 # For more information about me: https://github.com/imindMan
-# LICENSE: under GPL v3.0
+# LICENSE: under AGPL v3.0
 # Project name: slashcox, repo link: https://github.com/imindMan/slashcox
 # Description: discox, but support slashing commands
 #
