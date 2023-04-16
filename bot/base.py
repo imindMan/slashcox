@@ -8,6 +8,7 @@ import discord
 from discord import app_commands
 
 from .config import Config
+from .logger import Logger
 
 ### IMPORTANT VARIABLE ###
 config = Config()
@@ -29,7 +30,10 @@ class Client(discord.Client):
 
     async def on_ready(self):
         await self.tree.sync(guild=discord.Object(id=config.server_id))
-        print("HELLO WORLD!")
+        Logger.log("Slashcox has started!")
+        Logger.newline()
+        Logger.log(f"Logged in as {self.user.name}#{self.user.discriminator}")
+        Logger.log("Server id:", config.server_id)
 
 
 # The tree

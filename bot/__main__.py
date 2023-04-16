@@ -48,6 +48,7 @@ from discord import app_commands
 
 from .base import Client, Tree
 from .config import Config
+from .logger import Logger
 
 
 def main():
