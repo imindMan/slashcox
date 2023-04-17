@@ -1,4 +1,4 @@
-from bot.base import Event as BaseEvent
+from bot.base import BaseEvent
 
 
 class Event(BaseEvent):
