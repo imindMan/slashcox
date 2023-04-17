@@ -53,7 +53,17 @@ class Tree(app_commands.CommandTree):
         super().__init__(*args, **kwargs)
 
 
-class Event:
+class BaseEvent:
+    """The class for creating events
+    To create an event, create a file in bot/events and have a class called Event in it wich extends this class.
+    It needs to have a name attribute and an execute method.
+
+    [Attributes]:
+        name (str): The name of the event. Available names can be found here:
+            https://discordpy.readthedocs.io/en/stable/api.html#discord-api-events
+        execute (function):
+            The function which will get called. For what arguments to use, read the above docs.
+    """
     name: str = ""
 
     def __init__(self, client: Client, manager: EventManager) -> None:
