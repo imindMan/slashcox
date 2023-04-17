@@ -1,12 +1,13 @@
 __all__ = ["BaseManager", "EventManager"]
 
-from abc import abstractmethod
-from typing import List, TYPE_CHECKING
 import os
+from abc import abstractmethod
+from typing import TYPE_CHECKING, List
 
-#avoid circular imports
+# avoid circular imports
 if TYPE_CHECKING:
     from .base import ClientType
+
 
 class BaseManager:
     def __init__(self) -> None:
@@ -35,11 +36,10 @@ class BaseManager:
     async def register_all(self, client: "ClientType"):
         raise NotImplementedError("register_all method is not implemented")
 
+
 class EventManager(BaseManager):
     def load_module(self, path: str):
-        event = __import__(
-            path, globals(), locals(), ["Event"], 0
-        ).Event
+        event = __import__(path, globals(), locals(), ["Event"], 0).Event
         return event
 
     async def register_all(self, client: "ClientType"):

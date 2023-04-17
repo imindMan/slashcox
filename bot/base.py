@@ -3,11 +3,12 @@
 ##
 ############
 
+from abc import abstractmethod
+from typing import TypeAlias
+
 #### IMPORTING ####
 import discord
-from abc import abstractmethod
 from discord import app_commands
-from typing import TypeAlias
 
 from .config import Config
 from .logger import Logger
@@ -16,7 +17,7 @@ from .manager import EventManager
 ### IMPORTANT VARIABLE ###
 config = Config()
 
-#avoid circular imports
+# avoid circular imports
 ClientType: TypeAlias = "Client"
 ###################
 
@@ -51,6 +52,7 @@ class Tree(app_commands.CommandTree):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
 class Event:
     name: str = ""
 
@@ -60,7 +62,6 @@ class Event:
 
         if not self.name:
             raise ValueError("Event name is required")
-            
 
     @abstractmethod
     async def execute(self) -> None:
