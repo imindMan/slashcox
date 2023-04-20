@@ -49,6 +49,7 @@ class BaseManager:
 
     load_module and register_all are described above.
     """
+
     def __init__(self) -> None:
         """Initialize by creating an empty dictionary."""
         self.modules = {}
@@ -101,6 +102,7 @@ class EventManager(BaseManager):
     that extends bot.base.BaseEvent
     It needs to have a name attribute and an execute method.
     """
+
     def load_module(self, path: str):
         event = __import__(path, globals(), locals(), ["Event"], 0).Event
         return event
