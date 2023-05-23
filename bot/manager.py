@@ -55,7 +55,10 @@ class BaseManager:
         self.modules = {}
 
     def load_all(self, directory: List[str]) -> None:
-        """Load all the files in a directory."""
+        """Load all the files in a directory.
+           NOTE: I just hate the idea of making a category file then use it to load everything. Why not load all of them from scratch?
+           Also, speed is a problem anyway
+        """
         def get_files_dict(path):
             files_dict = {}
             for root, dirs, files in os.walk(path):
