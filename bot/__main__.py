@@ -59,14 +59,7 @@ def main():
     tree = Tree(client)
     client.init_tree(tree)
 
-    @tree.command(
-        name="hello",
-        description="Greet to people",
-        guild=discord.Object(id=config.server_id),
-    )
-    async def first_command(interaction):
-        await interaction.response.send_message("Hello!")
-
+    
     client.run(config.token)
 
 
