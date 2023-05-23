@@ -8,10 +8,11 @@
 from dotenv import load_dotenv
 
 load_dotenv()
-from discord.embeds import Embed as DiscordEmbed
 import datetime
 import os
 from typing import List
+
+from discord.embeds import Embed as DiscordEmbed
 
 
 # os.getenv returns an empty string if the value is empty so it doesn't use the second argument
@@ -56,6 +57,7 @@ class Config:
 
 
 ## EMBED STUFF ##
+
 
 class Embed(DiscordEmbed):
     """Custom implementation of a discord embed object."""

@@ -56,6 +56,7 @@ class BaseManager:
 
     def load_all(self, directory: List[str]) -> None:
         """Load all the files in a directory."""
+
         def get_files_dict(path):
             files_dict = {}
             for root, dirs, files in os.walk(path):
@@ -63,7 +64,7 @@ class BaseManager:
                 for dir in os.path.relpath(root, path).split(os.path.sep):
                     current_dict = current_dict.setdefault(dir, {})
                 for file in files:
-                    current_dict[file] = 'file'
+                    current_dict[file] = "file"
             return files_dict
 
         files = get_files_dict(os.path.join(*directory))
@@ -77,17 +78,21 @@ class BaseManager:
                         if filename == ".":
                             string_to_import = f"{'.'.join(directory)}.{module_name}"
                         elif filename == "__pycache__":
-                            continue 
+                            continue
                         elif files[filename] == "file":
-                            string_to_import = f"{'.'.join(directory)}.{filename}.{module_name}"
+                            string_to_import = (
+                                f"{'.'.join(directory)}.{filename}.{module_name}"
+                            )
                         else:
                             load_module(files[filename], filename)
-                    else: 
+                    else:
                         module_name = filename[:-3]
                         if filename == "__pycache__":
-                            continue 
+                            continue
                         elif files[filename] == "file":
-                            string_to_import = f"{'.'.join(directory)}.{extra_prefix}.{module_name}"
+                            string_to_import = (
+                                f"{'.'.join(directory)}.{extra_prefix}.{module_name}"
+                            )
                         else:
                             load_module(files[filename], extra_prefix + filename)
                     obj = self.load_module(string_to_import)
@@ -140,23 +145,24 @@ class EventManager(BaseManager):
             event = obj(client, self)
             setattr(client, event.name, event.execute)
 
+
 class CommandManager(BaseManager):
-    """Manager for discord commands 
-        Always need to be allocate in the bot/commands directory 
-        The same steps as EventManager class but instead you must have a class cmd that extends bot.base.BaseCommand
+    """Manager for discord commands
+    Always need to be allocate in the bot/commands directory
+    The same steps as EventManager class but instead you must have a class cmd that extends bot.base.BaseCommand
     """
+
     def __init__(self, tree) -> None:
         """Initialize by creating an empty dictionary."""
         self.modules = {}
         self.tree = tree
 
     def load_module(self, path: str):
-        command = __import__(path, globals(), locals(), ["cmd"], 0).cmd 
-        return command 
+        command = __import__(path, globals(), locals(), ["cmd"], 0).cmd
+        return command
 
     async def register_all(self, client: "ClientType"):
         for obj in self.modules.values():
             command = obj(client, self, self.tree)
-            setattr(client, command.name, command.execute) 
+            setattr(client, command.name, command.execute)
             await self.tree.register(command)
-

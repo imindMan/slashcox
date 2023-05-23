@@ -59,7 +59,6 @@ def main():
     tree = Tree(client)
     client.init_tree(tree)
 
-    
     client.run(config.token)
 
 
