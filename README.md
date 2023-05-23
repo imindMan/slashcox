@@ -11,7 +11,7 @@
 This project is basically [Discox](https://github.com/v1rbox/discox) but support slashing commands.
 
 # Installation
-The installation is pretty basic. If you are a discox developer (or contributor), you can immediately install it!
+The installation is pretty basic. If you are a discox developer (or contributor), you can (technically) immediately install it!
 
 For the rest, read the [wiki](https://github.com/imindMan/slashcox/wiki)
 
