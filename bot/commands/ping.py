@@ -1,4 +1,4 @@
-from bot.base import BaseCommand 
+from bot.base import BaseCommand
 
 
 class cmd(BaseCommand):
