@@ -3,6 +3,7 @@
 ##
 ############
 
+import asyncio
 import inspect
 from abc import abstractmethod
 from typing import TypeAlias
@@ -10,7 +11,6 @@ from typing import TypeAlias
 #### IMPORTING ####
 import discord
 from discord import app_commands
-import asyncio
 
 from .config import Config
 from .logger import Logger
@@ -27,6 +27,7 @@ ClientType: TypeAlias = "Client"
 # Client
 class Client(discord.Client):
     """initialize the client class"""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.max_messages = 2000
@@ -36,27 +37,31 @@ class Client(discord.Client):
         )
 
     """Basically apply the tree to the main client"""
+
     def init_tree(self, tree: app_commands.CommandTree):
         self.tree = tree
+
     """MAIN PART: This is the code will run when launching slashcox"""
+
     async def on_ready(self):
         # sync the tree
         await self.tree.sync(guild=discord.Object(id=config.server_id))
-        
-        # basically logger being 
+
+        # basically logger being
         Logger.log("Slashcox has started!")
         Logger.newline()
         Logger.log(f"Logged in as {self.user.name}#{self.user.discriminator}")
         Logger.log("Server id:", config.server_id)
-        
+
         # Initialize some managers
         eventManager = EventManager()
         eventManager.load_all(["bot", "events"])
         await eventManager.register_all(self)
-        
+
         commandManager = CommandManager(self.tree)
         commandManager.load_all(["bot", "commands"])
         await commandManager.register_all(self)
+
 
 # The tree
 class Tree(app_commands.CommandTree):
@@ -66,8 +71,8 @@ class Tree(app_commands.CommandTree):
     """Instead of just making a decorator, let's make a register method. 
     This function is really inspired by the @command decorator. Basically I use the source code of @app_commands.command 
     and apply to this function"""
+
     async def register(self, cmd):
-        
         if not inspect.iscoroutinefunction(cmd.execute):
             raise TypeError("command function must be a coroutine function")
 

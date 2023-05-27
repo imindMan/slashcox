@@ -135,6 +135,8 @@ class Calculator:
             return expr
 
         self.error()
+
+
 class cmd(BaseCommand):
     # The command.
     name = "calc"

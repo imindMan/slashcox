@@ -29,10 +29,13 @@ TODO Add a task manager
 
 __all__ = ["BaseManager", "EventManager"]
 
-import os, discord 
-from .config import Config
+import os
 from abc import abstractmethod
 from typing import TYPE_CHECKING, List
+
+import discord
+
+from .config import Config
 
 # avoid circular imports
 if TYPE_CHECKING:
@@ -103,7 +106,7 @@ class BaseManager:
                     self.modules[obj.name] = obj
 
         load_module(files)
-        
+
     def get(self, name: str):
         """Load an object from a given file.
         [Raises]:
@@ -165,8 +168,7 @@ class CommandManager(BaseManager):
         command = __import__(path, globals(), locals(), ["cmd"], 0).cmd
         return command
 
-    async def register_all(self, client: "ClientType"):   
+    async def register_all(self, client: "ClientType"):
         for obj in self.modules.values():
             command = obj(client, self)
             await self.tree.register(command)
-    

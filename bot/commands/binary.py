@@ -22,7 +22,7 @@ class cmd(BaseCommand):
                 "An error occured decoding the binary sequence - might not be a valid one."
             )
 
-    async def execute(self, interaction, option:str, message:str) -> None:
+    async def execute(self, interaction, option: str, message: str) -> None:
         # Get the option - either "encode" or "decode".
         if option not in ("encode", "decode"):
             raise KeyError(

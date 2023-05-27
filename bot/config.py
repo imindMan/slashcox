@@ -12,8 +12,9 @@ import datetime
 import os
 from typing import List
 
-from discord import Embed as DiscordEmbed
 from discord import Colour
+from discord import Embed as DiscordEmbed
+
 
 # os.getenv returns an empty string if the value is empty so it doesn't use the second argument
 def getenv(name: str, other: str = None) -> any:
