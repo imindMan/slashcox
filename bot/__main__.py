@@ -33,7 +33,7 @@
 # immediately, because it's exactly the same as discox, except for the .env file, a little bit different (read the wiki for more details).
 #
 # Although its core is a clone of discox but support slashing commands, this "slashcox" will also have some of my interesting commands
-# and utilies. Also, because it's slashing so it has some "new more modern vibe" comparing to its father discox.
+# and utilities. Also, because it's slashing so it has some "new more modern vibe" comparing to its father discox.
 #
 # Hope you enjoy!
 #                                           - imindMan

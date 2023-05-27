@@ -12,8 +12,8 @@ import datetime
 import os
 from typing import List
 
-from discord.embeds import Embed as DiscordEmbed
-
+from discord import Embed as DiscordEmbed
+from discord import Colour
 
 # os.getenv returns an empty string if the value is empty so it doesn't use the second argument
 def getenv(name: str, other: str = None) -> any:
@@ -89,8 +89,8 @@ class Embed(DiscordEmbed):
             "lightcyan": Colour(int("bcfbff", 16)),
         }
         self.set_footer(
-            text="Virbox Community Bot",
-            icon_url="https://cdn.discordapp.com/icons/1052597660860821604/8fd53af279aa7d8d77a0451776c4fa35.webp?size=96",
+            text="Slashcox - discox alternative",
+            icon_url="https://raw.githubusercontent.com/imindMan/slashcox/main/assets/logo_for_embed.png",
         )
         self.timestamp = datetime.datetime.now()
 
