@@ -172,3 +172,4 @@ class CommandManager(BaseManager):
         for obj in self.modules.values():
             command = obj(client, self)
             await self.tree.register(command)
+        await self.sync(guild=discord.Object(id=config.server_id))
