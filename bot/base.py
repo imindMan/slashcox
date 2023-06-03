@@ -85,7 +85,6 @@ class Tree(app_commands.CommandTree):
             ),
             guild=discord.Object(id=config.server_id),
         )
-        await self.sync(guild=discord.Object(id=config.server_id))
 
 
 class BaseEvent:
