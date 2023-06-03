@@ -10,9 +10,11 @@ class cmd(BaseCommand):
     """Gets a Random Leet Code Problem"""
 
     name = "leetcode"
-    description = "info: find total number of problem, gen: generate a new leetcode problem"
-    #discord command descriptions must be less than 100 characters long
-    #description = "Generates a random leetcode problem, use info to find total number of problem, use gen to generate a new problem"
+    description = (
+        "info: find total number of problem, gen: generate a new leetcode problem"
+    )
+    # discord command descriptions must be less than 100 characters long
+    # description = "Generates a random leetcode problem, use info to find total number of problem, use gen to generate a new problem"
 
     async def execute(self, interaction, command: str) -> None:
         leet_code_api_url = "https://leetcode.com/api/problems/all"
