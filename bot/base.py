@@ -72,7 +72,7 @@ class Tree(app_commands.CommandTree):
     This function is really inspired by the @command decorator. Basically I use the source code of @app_commands.command 
     and apply to this function"""
 
-    async def register(self, cmd):
+    def register(self, cmd):
         if not inspect.iscoroutinefunction(cmd.execute):
             raise TypeError("command function must be a coroutine function")
 

@@ -171,5 +171,5 @@ class CommandManager(BaseManager):
     async def register_all(self, client: "ClientType"):
         for obj in self.modules.values():
             command = obj(client, self)
-            await self.tree.register(command)
-        await self.sync(guild=discord.Object(id=config.server_id))
+            self.tree.register(command)
+        await self.tree.sync(guild=discord.Object(id=Config.server_id))
