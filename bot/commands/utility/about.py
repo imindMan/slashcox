@@ -19,7 +19,9 @@ class cmd(BaseCommand):
             color=0x00FF00,
         )
         embed.add_field(name="Github:", value="https://github.com/imindMan/slashcox")
-        embed.add_field(name="Original project:", value="https://github.com/v1rbox/discox")
+        embed.add_field(
+            name="Original project:", value="https://github.com/v1rbox/discox"
+        )
         embed.add_field(name="Virbox Channel:", value="https://www.youtube.com/@Virbox")
 
         await interaction.response.send_message(embed=embed)

@@ -1,6 +1,9 @@
+import discord
+
 from bot.base import BaseCommand
 from bot.config import Config, Embed
-import discord
+
+
 class cmd(BaseCommand):
     """A discord command instance."""
 
