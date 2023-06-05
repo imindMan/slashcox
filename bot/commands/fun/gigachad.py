@@ -40,4 +40,3 @@ class cmd(BaseCommand):
             url=f"https://raw.githubusercontent.com/justinlime/GigaChads/main/gigachads/{gigachad}"
         )
         await interaction.response.send_message(embed=embed)
-
