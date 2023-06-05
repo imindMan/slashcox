@@ -30,7 +30,6 @@ class cmd(BaseCommand):
     """
 
     name = "gen_spam"
-    usage = "gen_spam <algo> [spam_string]"
     description = (
         "Generate spamming messages. For fun. Type `v!gen_spam ? ?` for more help"
     )
