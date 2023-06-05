@@ -8,7 +8,9 @@ class cmd(BaseCommand):
     name = "ping"
     description = "Check the current latency of the bot."
 
-    async def execute(self, interaction, _type:str="empty", test3:str="empty") -> None:
+    async def execute(
+        self, interaction, _type: str = "empty", test3: str = "empty"
+    ) -> None:
         if _type == "print":
             embed = Embed(
                 title="Hello world!",

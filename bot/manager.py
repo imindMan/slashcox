@@ -104,7 +104,7 @@ class BaseManager:
                             load_module(files[filename], extra_prefix + filename)
                     if string_to_import != "":
                         obj = self.load_module(string_to_import)
-                    
+
                         self.modules[obj.name] = obj
 
         load_module(files)

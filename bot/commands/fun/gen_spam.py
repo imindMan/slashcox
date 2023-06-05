@@ -140,7 +140,7 @@ class cmd(BaseCommand):
         output = output[:final_chop]
         return output
 
-    async def execute(self, interaction, algo:str, spam_string:str) -> None:
+    async def execute(self, interaction, algo: str, spam_string: str) -> None:
         if contains_mention(interaction.content):
             return
 
