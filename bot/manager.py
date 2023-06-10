@@ -144,6 +144,9 @@ class EventManager(BaseManager):
     that extends bot.base.BaseEvent
     It needs to have a name attribute and an execute method.
     """
+    def __init__(self, db) -> None:
+        self.modules = {}
+        self.db = db
 
     def load_module(self, path: str):
         event = __import__(path, globals(), locals(), ["Event"], 0).Event
@@ -151,7 +154,7 @@ class EventManager(BaseManager):
 
     async def register_all(self, client: "ClientType"):
         for obj in self.modules.values():
-            event = obj(client, self)
+            event = obj(client, self, self.db)
             setattr(client, event.name, event.execute)
 
 
@@ -161,10 +164,11 @@ class CommandManager(BaseManager):
     The same steps as EventManager class but instead you must have a class cmd that extends bot.base.BaseCommand
     """
 
-    def __init__(self, tree) -> None:
+    def __init__(self, tree, db) -> None:
         """Initialize by creating an empty dictionary."""
         self.modules = {}
         self.tree = tree
+        self.db = db
 
     def load_module(self, path: str):
         command = __import__(path, globals(), locals(), ["cmd"], 0).cmd
@@ -172,6 +176,6 @@ class CommandManager(BaseManager):
 
     async def register_all(self, client: "ClientType"):
         for obj in self.modules.values():
-            command = obj(client, self)
+            command = obj(client, self, self.db)
             self.tree.register(command)
         await self.tree.sync(guild=discord.Object(id=Config.server_id))

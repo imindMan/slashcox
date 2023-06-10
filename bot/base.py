@@ -15,6 +15,7 @@ from discord import app_commands
 from .config import Config
 from .logger import Logger
 from .manager import CommandManager, EventManager
+from .sql import SQLParser
 
 ### IMPORTANT VARIABLE ###
 config = Config()
@@ -22,7 +23,67 @@ config = Config()
 # avoid circular imports
 ClientType: TypeAlias = "Client"
 ###################
-
+CREATE_STATEMENTS = [
+    """
+    CREATE TABLE IF NOT EXISTS slashcox.polls (
+        channel_id BIGINT NOT NULL,
+        message_id BIGINT NOT NULL PRIMARY KEY,
+        type ENUM('single', 'multiple')
+    );
+    """,
+    """
+        CREATE TABLE IF NOT EXISTS slashcox.levels (
+            user_id VARCHAR(100) PRIMARY KEY,
+            level INTEGER,
+            exp INTEGER,
+            font_color VARCHAR(25),
+            bg VARCHAR(2048) DEFAULT NULL
+        );
+    """,
+    """
+        CREATE TABLE IF NOT EXISTS slashcox.latest_video (
+	       video_id VARCHAR(50) PRIMARY KEY
+        );
+    """,
+    """
+        CREATE TABLE IF NOT EXISTS slashcox.request (
+            Number_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+            Member_id VARCHAR(100) NOT NULL,
+            Title VARCHAR(255) NOT NULL,
+            Description VARCHAR(2048) NOT NULL,
+            Upvote INTEGER NOT NULL,
+            Downvote INTEGER NOT NULL,
+            Pending_close INTEGER NOT NULL
+        );
+    """,
+    """
+        CREATE TABLE IF NOT EXISTS slashcox.reminders (
+            id INTEGER AUTO_INCREMENT PRIMARY KEY,
+            User VARCHAR(100),
+            Timestamp INTEGER,
+            Reminder VARCHAR(2048),
+            Channel VARCHAR(100),
+            Message VARCHAR(100)
+        );
+    """,
+    """
+        CREATE TABLE IF NOT EXISTS slashcox.membercount (
+            membercount INT PRIMARY KEY
+        );
+    """,
+    """
+    	CREATE TABLE IF NOT EXISTS slashcox.starboard (
+	       message_id VARCHAR(100) PRIMARY KEY,
+	       board_message_id VARCHAR(100)
+	   );
+    """,
+    """
+        CREATE TABLE IF NOT EXISTS slashcox.tags (
+            Name VARCHAR(100) UNIQUE PRIMARY KEY,
+            Content VARCHAR(2048)
+        );
+    """,
+]
 
 # Client
 class Client(discord.Client):
@@ -35,7 +96,6 @@ class Client(discord.Client):
         self.activity = discord.Activity(
             type=discord.ActivityType.watching, name="Virbox videos"
         )
-
     """Basically apply the tree to the main client"""
 
     def init_tree(self, tree: app_commands.CommandTree):
@@ -53,15 +113,19 @@ class Client(discord.Client):
         Logger.log(f"Logged in as {self.user.name}#{self.user.discriminator}")
         Logger.log("Server id:", config.server_id)
 
+        # Initialize the database
+        db = SQLParser("bot/assets/main.db", CREATE_STATEMENTS)
+        
+        await db.initialise()
         # Initialize some managers
-        eventManager = EventManager()
+        eventManager = EventManager(db)
         eventManager.load_all(["bot", "events"])
         await eventManager.register_all(self)
 
-        commandManager = CommandManager(self.tree)
+        commandManager = CommandManager(self.tree, db)
         commandManager.load_all(["bot", "commands"])
         await commandManager.register_all(self)
-
+        
 
 # The tree
 class Tree(app_commands.CommandTree):
@@ -101,9 +165,10 @@ class BaseEvent:
 
     name: str = ""
 
-    def __init__(self, client: Client, manager: EventManager) -> None:
+    def __init__(self, client: Client, manager: EventManager, db) -> None:
         self.bot = client
         self.manager = manager
+        self.db = db
 
         if not self.name:
             raise ValueError("Event name is required")
@@ -122,9 +187,10 @@ class BaseCommand:
     name: str = ""
     description: str = ""
 
-    def __init__(self, client: Client, manager: CommandManager) -> None:
+    def __init__(self, client: Client, manager: CommandManager, db) -> None:
         self.bot = client
         self.manager = manager
+        self.db = db
 
         if not self.name:
             raise ValueError("A name for a command is required")
