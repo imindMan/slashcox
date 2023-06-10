@@ -10,6 +10,7 @@ class SQLParser:
     def __init__(self, file: str, create_statemets: List[str]) -> None:
         self.create_statements = create_statemets
         self.file = file
+
     @staticmethod
     def connect(func):
         """Connection declorator to initialise the db when it is called"""

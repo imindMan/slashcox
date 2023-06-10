@@ -144,6 +144,7 @@ class EventManager(BaseManager):
     that extends bot.base.BaseEvent
     It needs to have a name attribute and an execute method.
     """
+
     def __init__(self, db) -> None:
         self.modules = {}
         self.db = db

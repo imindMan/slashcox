@@ -85,6 +85,7 @@ CREATE_STATEMENTS = [
     """,
 ]
 
+
 # Client
 class Client(discord.Client):
     """initialize the client class"""
@@ -96,6 +97,7 @@ class Client(discord.Client):
         self.activity = discord.Activity(
             type=discord.ActivityType.watching, name="Virbox videos"
         )
+
     """Basically apply the tree to the main client"""
 
     def init_tree(self, tree: app_commands.CommandTree):
@@ -115,7 +117,7 @@ class Client(discord.Client):
 
         # Initialize the database
         db = SQLParser("bot/assets/main.db", CREATE_STATEMENTS)
-        
+
         await db.initialise()
         # Initialize some managers
         eventManager = EventManager(db)
@@ -125,7 +127,7 @@ class Client(discord.Client):
         commandManager = CommandManager(self.tree, db)
         commandManager.load_all(["bot", "commands"])
         await commandManager.register_all(self)
-        
+
 
 # The tree
 class Tree(app_commands.CommandTree):
