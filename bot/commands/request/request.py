@@ -1,28 +1,29 @@
+import discord
+from discord.ui import Modal, TextInput
+
 from bot.base import BaseCommand
 from bot.config import Config, Embed
-from discord.ui import TextInput, Modal
 
-import discord
 
 class RequestModal(Modal, title="Slashcox request input prompt"):
     title_of_the_request = TextInput(
-            style = discord.TextStyle.short,
-                            label="Title",
-                            required=True,
-                            placeholder="Good title"
-        )
+        style=discord.TextStyle.short,
+        label="Title",
+        required=True,
+        placeholder="Good title",
+    )
     description_of_the_request = TextInput(
-                        style = discord.TextStyle.long,
-                        label ="Description",
-                        required=True,
-                        max_length=1000,
-                        placeholder="This is a sample description"
-            
-                )
+        style=discord.TextStyle.long,
+        label="Description",
+        required=True,
+        max_length=1000,
+        placeholder="This is a sample description",
+    )
+
     def init_db(self, db):
         self.db = db
+
     async def on_submit(self, interaction) -> None:
-        
         member_id = interaction.user.__repr__()
         # MAIN EXECUTION: after getting all the information, the bot will add all of the information to the database
         split_member_id = member_id.split(" ")
@@ -32,7 +33,14 @@ class RequestModal(Modal, title="Slashcox request input prompt"):
 
         await self.db.raw_exec_commit(
             "INSERT INTO request(Member_id, Title, Description, Upvote, Downvote, Pending_close) VALUES(?, ?, ?, ?, ?, ?)",
-            (member_id, self.title_of_the_request.value, self.description_of_the_request.value, 0, 0, 0),
+            (
+                member_id,
+                self.title_of_the_request.value,
+                self.description_of_the_request.value,
+                0,
+                0,
+                0,
+            ),
         )
         # Notify the user that the bot has added the request to the database.
 
@@ -41,9 +49,12 @@ class RequestModal(Modal, title="Slashcox request input prompt"):
         for i in Config.mod_role_id:
             ping_roles += "<@&" + str(i) + ">"
 
-        embed = Embed(title=f"{interaction.user.mention}{ping_roles} A request has been added! Please consider to review it and start voting")
+        embed = Embed(
+            title=f"{interaction.user.mention}{ping_roles} A request has been added! Please consider to review it and start voting"
+        )
         await interaction.response.send_message(ping_roles, embed=embed)
-    
+
+
 class cmd(BaseCommand):
     """
     INFO: this is a request command. It's used for requesting the server to do something.
@@ -70,5 +81,3 @@ class cmd(BaseCommand):
         modal = RequestModal()
         modal.init_db(self.db)
         await interaction.response.send_modal(modal)
-        
-        

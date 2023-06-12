@@ -116,7 +116,7 @@ class Client(discord.Client):
 
         # Initialize the database
         db = SQLParser(CREATE_STATEMENTS)
-        
+
         await db.initialise()
         # Initialize some managers
         eventManager = EventManager(db)
