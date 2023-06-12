@@ -8,6 +8,7 @@ from .config import Config
 class SQLParser:
     def __init__(self, create_statemets: List[str]) -> None:
         self.create_statements = create_statemets
+
     @staticmethod
     def connect(func):
         """Connection declorator to initialise the db when it is called"""
