@@ -1,4 +1,3 @@
-import asyncio
 from typing import Any, Dict, List, Optional, Tuple
 
 import aiomysql
@@ -7,9 +6,9 @@ from .config import Config
 
 
 class SQLParser:
-    def __init__(self, file: str, create_statemets: List[str]) -> None:
+    def __init__(self, create_statemets: List[str]) -> None:
         self.create_statements = create_statemets
-        self.file = file
+      
     @staticmethod
     def connect(func):
         """Connection declorator to initialise the db when it is called"""

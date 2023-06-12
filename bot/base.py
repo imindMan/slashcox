@@ -3,7 +3,6 @@
 ##
 ############
 
-import asyncio
 import inspect
 from abc import abstractmethod
 from typing import TypeAlias
@@ -114,7 +113,7 @@ class Client(discord.Client):
         Logger.log("Server id:", config.server_id)
 
         # Initialize the database
-        db = SQLParser("bot/assets/main.db", CREATE_STATEMENTS)
+        db = SQLParser(CREATE_STATEMENTS)
         
         await db.initialise()
         # Initialize some managers
