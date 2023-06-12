@@ -44,4 +44,3 @@ class cmd(BaseCommand):
                 description=f"We have hit {int(math.floor(member_count / 1000)) * 1000} members. Thank you to everyone who joined!",
             )
             await interaction.response.send_message(embed=embed)
-
