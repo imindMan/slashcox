@@ -55,7 +55,7 @@ class cmd(BaseCommand):
         final = f"{number_id}. '{title}' by {member_id}\nVote count: U:{upvote} - D:{downvote} - G:{int(upvote) - int(downvote)}\nPending close: {pending_close}"
         return final
 
-    async def execute(self, interaction, number_id:int) -> None:
+    async def execute(self, interaction, number_id: int) -> None:
         """
         MAIN EXECUTION:
             After the user type in the command, the bot will check if the arguments[0] (the first argument) is 0 or another number. If it's 0, then the bot will select the request table in the database and show all of them in a specific format that looks like this:
@@ -95,8 +95,6 @@ class cmd(BaseCommand):
                 )
                 await interaction.response.send_message(embed=embed)
         else:
-    
-
             row = await self.db.raw_exec_select(
                 f"SELECT * FROM request WHERE Number_id = ?", (number_id,)
             )

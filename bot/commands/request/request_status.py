@@ -1,4 +1,3 @@
-
 from bot.base import BaseCommand
 from bot.config import Config, Embed
 
