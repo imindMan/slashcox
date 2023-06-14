@@ -144,7 +144,7 @@ class cmd(BaseCommand):
             return
 
         if algo == "?" and spam_string == "?":
-            await interaction.channel.send(
+            await interaction.response.send_message(
                 """ ```Usage: v!gen_spam <algo> <spam_string>
 This method supports a variety of cool algorithms you can choose:
     1. General spamming: (algo input: gen_spam).
@@ -162,21 +162,21 @@ This method supports a variety of cool algorithms you can choose:
             return
         if algo == "gen_spam":
             output = self.general_spam(spam_string)
-            await interaction.channel.send(output)
+            await interaction.response.send_message(output)
 
         elif algo[:10] == "drill_spam" and len(algo) >= 12:
             output = self.drill_spam(spam_string, int(algo[11:]))
-            await interaction.channel.send(output)
+            await interaction.response.send_message(output)
 
         elif algo == "addict_spam":
             output = self.addict_spam(spam_string)
-            await interaction.channel.send(output)
+            await interaction.response.send_message(output)
 
         elif algo == "literal_spam":
             output = self.literal_spam(spam_string)
-            await interaction.channel.send(output)
+            await interaction.response.send_message(output)
 
         else:
             embed = Embed(title="Invalid argument detected!")
             embed.set_color("red")
-            await interaction.channel.send(embed=embed)
+            await interaction.response.send_message(embed=embed)
