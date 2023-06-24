@@ -24,6 +24,28 @@ ClientType: TypeAlias = "Client"
 ###################
 CREATE_STATEMENTS = [
     """
+        CREATE TABLE IF NOT EXISTS slashcox.fetch (
+            user VARCHAR(100) NOT NULL,
+            image LONGBLOB,
+            distro VARCHAR(100) ,
+            kernel VARCHAR(100) ,
+            terminal VARCHAR(100) ,
+            editor VARCHAR(100) ,
+            shell VARCHAR(100) ,
+            de_wm VARCHAR(100) ,
+            bar VARCHAR(100) ,
+            resolution VARCHAR(100) ,
+            gtk_theme VARCHAR(100) ,
+            gtk_icon_theme VARCHAR(100) ,
+            cpu VARCHAR(100) ,
+            gpu VARCHAR(100) ,
+            description VARCHAR(100) ,
+            dotfiles VARCHAR(100) ,
+            git VARCHAR(100) ,
+            memory VARCHAR(100) 
+        );
+    """,
+    """
     CREATE TABLE IF NOT EXISTS slashcox.polls (
         channel_id BIGINT NOT NULL,
         message_id BIGINT NOT NULL PRIMARY KEY,
