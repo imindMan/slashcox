@@ -1,57 +1,56 @@
+from discord import Attachment
+
 from bot.base import BaseCommand
 from bot.config import Config, Embed
-from discord import Attachment 
+
 
 class cmd(BaseCommand):
     name = "setfetch"
     description = "Setup your fetch"
 
     async def execute(
-            self, 
-            interaction, 
-            image: Attachment = None, 
-            distro: str = None, 
-            kernel: str = None,
-            terminal: str = None,
-            editor: str = None,
-            shell: str = None,
-            de_wm: str = None,
-            bar: str = None,
-            resolution: str = None,
-            display_protocol: str = None,
-            gtk_theme: str = None,
-            gtk_icon_theme: str = None,
-            cpu: str =None, 
-            gpu: str =None,
-            description: str =None,
-            dotfiles: str = None,
-            git: str = None, 
-            memory: str = None
-
+        self,
+        interaction,
+        image: Attachment = None,
+        distro: str = None,
+        kernel: str = None,
+        terminal: str = None,
+        editor: str = None,
+        shell: str = None,
+        de_wm: str = None,
+        bar: str = None,
+        resolution: str = None,
+        display_protocol: str = None,
+        gtk_theme: str = None,
+        gtk_icon_theme: str = None,
+        cpu: str = None,
+        gpu: str = None,
+        description: str = None,
+        dotfiles: str = None,
+        git: str = None,
+        memory: str = None,
     ) -> None:
         await self.db.raw_exec_commit(
             "INSERT INTO fetch(user, image, distro, kernel, terminal, editor, shell, de_wm, bar, resolution, display_protocol, gtk_theme, gtk_icon_theme, cpu, gpu, description, dotfiles, git, memory) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 interaction.user,
-                image, 
-            distro, 
-            kernel,
-            terminal,
-            editor,
-            shell,
-            de_wm,
-            bar,
-            resolution,
-            display_protocol,
-            gtk_theme,
-            gtk_icon_theme,
-            cpu, 
-            gpu,
-            description,
-            dotfiles,
-            git, 
-            memory,
-
+                image,
+                distro,
+                kernel,
+                terminal,
+                editor,
+                shell,
+                de_wm,
+                bar,
+                resolution,
+                display_protocol,
+                gtk_theme,
+                gtk_icon_theme,
+                cpu,
+                gpu,
+                description,
+                dotfiles,
+                git,
+                memory,
             ),
         )
-
