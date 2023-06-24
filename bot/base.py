@@ -11,7 +11,7 @@ from typing import TypeAlias
 import discord
 from discord import app_commands
 
-from .config import Config, CREATE_STATEMENTS
+from .config import CREATE_STATEMENTS, Config
 from .logger import Logger
 from .manager import CommandManager, EventManager
 from .sql import SQLParser
@@ -21,6 +21,7 @@ config = Config()
 
 # avoid circular imports
 ClientType: TypeAlias = "Client"
+
 
 # Client
 class Client(discord.Client):
