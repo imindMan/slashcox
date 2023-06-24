@@ -30,7 +30,7 @@ class cmd(BaseCommand):
 
     ) -> None:
         await self.db.raw_exec_commit(
-            "INSERT INTO fetch(user, image, distro, kernel, terminal, editor, shell, de_wm, bar, resolution, display_protocol, gtk_theme, gtk_icon_theme, cpu, gpu, description, dotfiles, git, memory) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO slashcox.fetch(user, image, distro, kernel, terminal, editor, shell, de_wm, bar, resolution, display_protocol, gtk_theme, gtk_icon_theme, cpu, gpu, description, dotfiles, git, memory) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 interaction.user,
                 image, 
@@ -54,4 +54,5 @@ class cmd(BaseCommand):
 
             ),
         )
-
+        embed = Embed(title="Successfully make your fetch!")
+        await interaction.response.send_message(embed)

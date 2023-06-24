@@ -11,7 +11,7 @@ from typing import TypeAlias
 import discord
 from discord import app_commands
 
-from .config import Config
+from .config import Config, CREATE_STATEMENTS
 from .logger import Logger
 from .manager import CommandManager, EventManager
 from .sql import SQLParser
@@ -21,91 +21,6 @@ config = Config()
 
 # avoid circular imports
 ClientType: TypeAlias = "Client"
-###################
-CREATE_STATEMENTS = [
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.fetch (
-            user VARCHAR(100) NOT NULL,
-            image LONGBLOB,
-            distro VARCHAR(100) ,
-            kernel VARCHAR(100) ,
-            terminal VARCHAR(100) ,
-            editor VARCHAR(100) ,
-            shell VARCHAR(100) ,
-            de_wm VARCHAR(100) ,
-            bar VARCHAR(100) ,
-            resolution VARCHAR(100) ,
-            gtk_theme VARCHAR(100) ,
-            gtk_icon_theme VARCHAR(100) ,
-            cpu VARCHAR(100) ,
-            gpu VARCHAR(100) ,
-            description VARCHAR(100) ,
-            dotfiles VARCHAR(100) ,
-            git VARCHAR(100) ,
-            memory VARCHAR(100) 
-        );
-    """,
-    """
-    CREATE TABLE IF NOT EXISTS slashcox.polls (
-        channel_id BIGINT NOT NULL,
-        message_id BIGINT NOT NULL PRIMARY KEY,
-        type ENUM('single', 'multiple')
-    );
-    """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.levels (
-            user_id VARCHAR(100) PRIMARY KEY,
-            level INTEGER,
-            exp INTEGER,
-            font_color VARCHAR(25),
-            bg VARCHAR(2048) DEFAULT NULL
-        );
-    """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.latest_video (
-	       video_id VARCHAR(50) PRIMARY KEY
-        );
-    """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.request (
-            Number_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-            Member_id VARCHAR(100) NOT NULL,
-            Title VARCHAR(255) NOT NULL,
-            Description VARCHAR(2048) NOT NULL,
-            Upvote INTEGER NOT NULL,
-            Downvote INTEGER NOT NULL,
-            Pending_close INTEGER NOT NULL
-        );
-    """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.reminders (
-            id INTEGER AUTO_INCREMENT PRIMARY KEY,
-            User VARCHAR(100),
-            Timestamp INTEGER,
-            Reminder VARCHAR(2048),
-            Channel VARCHAR(100),
-            Message VARCHAR(100)
-        );
-    """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.membercount (
-            membercount INT PRIMARY KEY
-        );
-    """,
-    """
-    	CREATE TABLE IF NOT EXISTS slashcox.starboard (
-	       message_id VARCHAR(100) PRIMARY KEY,
-	       board_message_id VARCHAR(100)
-	   );
-    """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.tags (
-            Name VARCHAR(100) UNIQUE PRIMARY KEY,
-            Content VARCHAR(2048)
-        );
-    """,
-]
-
 
 # Client
 class Client(discord.Client):
