@@ -55,4 +55,4 @@ class cmd(BaseCommand):
             ),
         )
         embed = Embed(title="Successfully make your fetch!")
-        await interaction.response.send_message(embed)
+        await interaction.response.send_message(embed=embed)
