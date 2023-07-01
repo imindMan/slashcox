@@ -79,12 +79,14 @@ class Tree(app_commands.CommandTree):
         if not inspect.iscoroutinefunction(cmd.execute):
             raise TypeError("command function must be a coroutine function")
         command = app_commands.Command(
-                name = cmd.name,
-                description=cmd.description,
-                callback=cmd.execute,
-                parent=None
-                )
-        command.check_permissions = lambda interaction: cmd.check_permissions(interaction)
+            name=cmd.name,
+            description=cmd.description,
+            callback=cmd.execute,
+            parent=None,
+        )
+        command.check_permissions = lambda interaction: cmd.check_permissions(
+            interaction
+        )
         self.add_command(
             command,
             guild=discord.Object(id=config.server_id),

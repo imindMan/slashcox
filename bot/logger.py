@@ -1,5 +1,6 @@
 from .config import Embed
 
+
 class Logger:
     @staticmethod
     def newline():
@@ -12,7 +13,7 @@ class Logger:
     @staticmethod
     def error(*args):
         print("[!]", *args)
-    
+
     @staticmethod
     async def send_error(err: str, interaction) -> None:
         embed = Embed(
