@@ -15,10 +15,12 @@ from typing import List
 from discord import Colour
 from discord import Embed as DiscordEmbed
 
+DATABASE = "slashcox"
+
 # for sql stuff
 CREATE_STATEMENTS = [
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.fetch (
+    f"""
+        CREATE TABLE IF NOT EXISTS {DATABASE}.fetch (
             user VARCHAR(100) NOT NULL,
             image LONGBLOB,
             distro VARCHAR(100),
@@ -40,15 +42,15 @@ CREATE_STATEMENTS = [
             memory VARCHAR(100) 
         );
     """,
-    """
-    CREATE TABLE IF NOT EXISTS slashcox.polls (
+    f"""
+    CREATE TABLE IF NOT EXISTS {DATABASE}.polls (
         channel_id BIGINT NOT NULL,
         message_id BIGINT NOT NULL PRIMARY KEY,
         type ENUM('single', 'multiple')
     );
     """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.levels (
+    f"""
+        CREATE TABLE IF NOT EXISTS {DATABASE}.levels (
             user_id VARCHAR(100) PRIMARY KEY,
             level INTEGER,
             exp INTEGER,
@@ -56,13 +58,13 @@ CREATE_STATEMENTS = [
             bg VARCHAR(2048) DEFAULT NULL
         );
     """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.latest_video (
+    f"""
+        CREATE TABLE IF NOT EXISTS {DATABASE}.latest_video (
 	       video_id VARCHAR(50) PRIMARY KEY
         );
     """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.request (
+    f"""
+        CREATE TABLE IF NOT EXISTS {DATABASE}.request (
             Number_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
             Member_id VARCHAR(100) NOT NULL,
             Title VARCHAR(255) NOT NULL,
@@ -72,8 +74,8 @@ CREATE_STATEMENTS = [
             Pending_close INTEGER NOT NULL
         );
     """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.reminders (
+    f"""
+        CREATE TABLE IF NOT EXISTS {DATABASE}.reminders (
             id INTEGER AUTO_INCREMENT PRIMARY KEY,
             User VARCHAR(100),
             Timestamp INTEGER,
@@ -82,19 +84,19 @@ CREATE_STATEMENTS = [
             Message VARCHAR(100)
         );
     """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.membercount (
+    f"""
+        CREATE TABLE IF NOT EXISTS {DATABASE}.membercount (
             membercount INT PRIMARY KEY
         );
     """,
-    """
-    	CREATE TABLE IF NOT EXISTS slashcox.starboard (
+    f"""
+    	CREATE TABLE IF NOT EXISTS {DATABASE}.starboard (
 	       message_id VARCHAR(100) PRIMARY KEY,
 	       board_message_id VARCHAR(100)
 	   );
     """,
-    """
-        CREATE TABLE IF NOT EXISTS slashcox.tags (
+    f"""
+        CREATE TABLE IF NOT EXISTS {DATABASE}.tags (
             Name VARCHAR(100) UNIQUE PRIMARY KEY,
             Content VARCHAR(2048)
         );
