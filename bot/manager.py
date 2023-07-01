@@ -27,7 +27,7 @@ TODO Add a command manager
 TODO Add a task manager
 """
 
-__all__ = ["BaseManager", "EventManager"]
+__all__ = ["BaseManager", "EventManager", "CommandManager"]
 
 import os
 from abc import abstractmethod

@@ -78,14 +78,15 @@ class Tree(app_commands.CommandTree):
     def register(self, cmd):
         if not inspect.iscoroutinefunction(cmd.execute):
             raise TypeError("command function must be a coroutine function")
-
-        self.add_command(
-            app_commands.Command(
-                name=cmd.name,
+        command = app_commands.Command(
+                name = cmd.name,
                 description=cmd.description,
                 callback=cmd.execute,
-                parent=None,
-            ),
+                parent=None
+                )
+        command.check_permissions = lambda interaction: cmd.check_permissions(interaction)
+        self.add_command(
+            command,
             guild=discord.Object(id=config.server_id),
         )
 
@@ -140,3 +141,6 @@ class BaseCommand:
     @abstractmethod
     async def execute(self) -> None:
         raise NotImplementedError("Execute method is required")
+
+    def check_permissions(self, interaction) -> bool:
+        return True
