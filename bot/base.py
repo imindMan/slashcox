@@ -132,6 +132,7 @@ class BaseCommand:
         self.bot = client
         self.manager = manager
         self.db = db
+        self.logger = Logger()
 
         if not self.name:
             raise ValueError("A name for a command is required")
