@@ -85,7 +85,7 @@ class Tree(app_commands.CommandTree):
             parent=None,
         )
         command.check_permissions = cmd.check_permissions
-            
+
         self.add_command(
             command,
             guild=discord.Object(id=config.server_id),
