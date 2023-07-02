@@ -11,13 +11,11 @@ class cmd(BaseCommand):
     usage = "removetag <*name>"
     description = "Removes a tag"
 
-    async def execute(self, interaction, name:str) -> None:
+    async def execute(self, interaction, name: str) -> None:
         if name == "":
             return await self.logger.send_error("Please provide a name", interaction)
         await self.db.raw_exec_commit(
             """DELETE FROM tags WHERE Name = ?""", (quote(name))
         )
-        embed = Embed(
-            title="Tag removed", description=f"The tag '{name}' was removed"
-        )
+        embed = Embed(title="Tag removed", description=f"The tag '{name}' was removed")
         await interaction.response.send_message(embed=embed)
