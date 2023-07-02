@@ -84,9 +84,8 @@ class Tree(app_commands.CommandTree):
             callback=cmd.execute,
             parent=None,
         )
-        command.check_permissions = lambda interaction: cmd.check_permissions(
-            interaction
-        )
+        command.check_permissions = cmd.check_permissions
+            
         self.add_command(
             command,
             guild=discord.Object(id=config.server_id),
