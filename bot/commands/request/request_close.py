@@ -1,5 +1,5 @@
-from discord.ui import View, Button
 from discord import Interaction
+from discord.ui import Button, View
 
 from bot.base import BaseCommand
 from bot.config import Config, Embed
@@ -17,7 +17,7 @@ class cmd(BaseCommand):
     name = "request_close"
     description = "Close the request. Only mod can deal with it"
 
-    async def execute(self, interaction:Interaction, number_id:int) -> None:
+    async def execute(self, interaction: Interaction, number_id: int) -> None:
         """
         HOW IT WORKS:
             After entering the command, the bot will check that if the number_id is valid. If that's the case
@@ -38,7 +38,7 @@ class cmd(BaseCommand):
 
         # Send the message to the user
         yes_button = Button(emoji="👍", label="Yes")
-        
+
         async def yes_button_callback(interaction):
             """
             HOW IT WORKS:
@@ -96,26 +96,26 @@ class cmd(BaseCommand):
             embed = Embed(title="The data has successfully been deleted!")
             await interaction.response.send_message(embed=embed)
 
-        
         yes_button.callback = yes_button_callback
 
         no_button = Button(emoji="👎", label="No")
+
         async def no_button_callback(interaction):
             embed = Embed(title="The request has successfully been ignored!")
             await interaction.response.send_message(embed=embed)
-        no_button.callback = no_button_callback
 
+        no_button.callback = no_button_callback
 
         view = View()
         view.add_item(yes_button)
         view.add_item(no_button)
-        
+
         embed = Embed(
             title="Are you sure?",
             description="React 👍 if you wish to or 👎 if you don't want to. \nEstimate time: 1min",
         )
         embed.set_color("red")
         await interaction.response.send_message(embed=embed, view=view)
-    
+
     def check_permissions(self, interaction):
         return any([i.id in Config().mod_role_id for i in interaction.user.roles])
