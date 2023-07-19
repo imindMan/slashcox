@@ -11,7 +11,7 @@ from typing import TypeAlias
 import discord
 from discord import app_commands
 
-from .config import CREATE_STATEMENTS, Config
+from .config import CREATE_STATEMENTS, Config, Embed
 from .logger import Logger
 from .manager import CommandManager, EventManager
 from .sql import SQLParser

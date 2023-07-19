@@ -2,6 +2,7 @@ from discord import Attachment
 
 from bot.base import BaseCommand
 from bot.config import Config, Embed
+from bot.logger import Logger
 
 
 class cmd(BaseCommand):
@@ -30,6 +31,12 @@ class cmd(BaseCommand):
         git: str = None,
         memory: str = None,
     ) -> None:
+        check = await self.db.raw_exec_select("SELECT * FROM slashcox.fetch WHERE user=?;", (interaction.user,))
+        if check != ():
+            logger = Logger()
+            await logger.send_error("Already existed that user", interaction)
+            return 
+
         await self.db.raw_exec_commit(
             "INSERT INTO slashcox.fetch(user, image, distro, kernel, terminal, editor, shell, de_wm, bar, resolution, display_protocol, gtk_theme, gtk_icon_theme, cpu, gpu, description, dotfiles, git, memory) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
