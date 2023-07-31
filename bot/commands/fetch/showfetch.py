@@ -1,9 +1,11 @@
+from io import BytesIO
+
 import discord
+from PIL import Image
 
 from bot.base import BaseCommand
 from bot.config import Config, Embed
-from PIL import Image
-from io import BytesIO
+
 
 class cmd(BaseCommand):
     name = "showfetch"
@@ -36,7 +38,7 @@ class cmd(BaseCommand):
             if tuple_of_fetch[0][1:][i] is not None:
                 arguments[list_of_keys[i]] = tuple_of_fetch[0][1:][i]
                 if i == 0:
-                    has_image = True 
+                    has_image = True
 
         self.arguments = arguments
         if has_image == False:
@@ -61,13 +63,14 @@ class cmd(BaseCommand):
         self.apply_list_of_arguments(fetch_data)
 
         string_to_print = ""
-        self.arguments_tempo = {key: value for key,value in self.arguments.items() if key != "image"}
+        self.arguments_tempo = {
+            key: value for key, value in self.arguments.items() if key != "image"
+        }
         for key, value in self.arguments_tempo.items():
             if value is not None:
                 string_to_print += "{:<17} {:<15}\n".format(key, value)
 
         if self.arguments["image"] is None:
-            
             embed = Embed(title=f"Fetch info from {user}", description=string_to_print)
             await interaction.response.send_message(embed=embed)
 

@@ -36,25 +36,25 @@ class cmd(BaseCommand):
         )
         if check != ():
             arguments = [
-            image,
-            distro,
-            kernel,
-            terminal,
-            editor,
-            shell,
-            de_wm,
-            bar,
-            resolution,
-            display_protocol,
-            gtk_theme,
-            gtk_icon_theme,
-            cpu,
-            gpu,
-            description,
-            dotfiles,
-            git,
-            memory,
-        ]
+                image,
+                distro,
+                kernel,
+                terminal,
+                editor,
+                shell,
+                de_wm,
+                bar,
+                resolution,
+                display_protocol,
+                gtk_theme,
+                gtk_icon_theme,
+                cpu,
+                gpu,
+                description,
+                dotfiles,
+                git,
+                memory,
+            ]
 
             for i in range(len(arguments)):
                 if arguments[i] is not None:
@@ -97,4 +97,3 @@ class cmd(BaseCommand):
         )
         embed = Embed(title="Successfully make your fetch!")
         await interaction.response.send_message(embed=embed)
-
