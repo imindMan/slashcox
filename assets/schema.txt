@@ -1,0 +1,16 @@
+from bot.base import BaseCommand
+from bot.config import Config, Embed
+
+class cmd(BaseCommand):
+    name = "helloworld"
+    description = "Print hello world"
+
+
+    async def execute(self, interaction, option: str):
+        embed = Embed(title="Hello world")
+        if option == "extra":
+            embed.set_footer("Extra note")
+
+        await interaction.response.send_message("Hello world")
+    def check_permissions(self, interaction):
+        return True # to make it simple, let's return True for this one. In such permission-required commands, we can add more stuff inside this function. Note that you can take the user's roles and permissions in the interaction argument

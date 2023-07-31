@@ -22,7 +22,7 @@ CREATE_STATEMENTS = [
     f"""
         CREATE TABLE IF NOT EXISTS {DATABASE}.fetch (
             user VARCHAR(100) NOT NULL,
-            image LONGBLOB,
+            image VARCHAR(10000),
             distro VARCHAR(100),
             kernel VARCHAR(100),
             terminal VARCHAR(100), 
