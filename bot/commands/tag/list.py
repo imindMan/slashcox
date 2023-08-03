@@ -1,4 +1,3 @@
-
 from urllib.parse import unquote
 
 from bot.base import BaseCommand

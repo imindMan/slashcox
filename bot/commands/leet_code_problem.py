@@ -1,10 +1,11 @@
 import random
+from typing import Literal
 
 import aiohttp
 
 from bot.base import BaseCommand
 from bot.config import Config, Embed
-from typing import Literal
+
 
 class cmd(BaseCommand):
     """Gets a Random Leet Code Problem"""

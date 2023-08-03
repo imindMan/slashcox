@@ -1,8 +1,10 @@
 # Replies with the given message in binary.
 
+from typing import Literal
+
 from bot.base import BaseCommand
 from bot.config import Embed
-from typing import Literal
+
 
 class cmd(BaseCommand):
     # Our 'binary' command.
@@ -22,8 +24,9 @@ class cmd(BaseCommand):
                 "An error occured decoding the binary sequence - might not be a valid one."
             )
 
-    async def execute(self, interaction, option: Literal["encode", "decode"], message: str) -> None:
-
+    async def execute(
+        self, interaction, option: Literal["encode", "decode"], message: str
+    ) -> None:
         # If encode is True, we will encode the given message. Else, we decode a binary sequence.
         encode = option == "encode"
 
