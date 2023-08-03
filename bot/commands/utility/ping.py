@@ -1,6 +1,6 @@
 from bot.base import BaseCommand
 from bot.config import Config, Embed
-
+from typing import Literal
 
 class cmd(BaseCommand):
     """A discord command instance."""
@@ -9,7 +9,7 @@ class cmd(BaseCommand):
     description = "Check the current latency of the bot."
 
     async def execute(
-        self, interaction, _type: str = "empty", test3: str = "empty"
+        self, interaction, _type: Literal["print", "latency"], test3: str = "Empty content"
     ) -> None:
         if _type == "print":
             embed = Embed(

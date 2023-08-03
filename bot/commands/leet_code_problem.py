@@ -4,7 +4,7 @@ import aiohttp
 
 from bot.base import BaseCommand
 from bot.config import Config, Embed
-
+from typing import Literal
 
 class cmd(BaseCommand):
     """Gets a Random Leet Code Problem"""
@@ -16,7 +16,7 @@ class cmd(BaseCommand):
     # discord command descriptions must be less than 100 characters long
     # description = "Generates a random leetcode problem, use info to find total number of problem, use gen to generate a new problem"
 
-    async def execute(self, interaction, command: str) -> None:
+    async def execute(self, interaction, command: Literal["info", "gen"]) -> None:
         leet_code_api_url = "https://leetcode.com/api/problems/all"
         async with aiohttp.ClientSession() as ses:
             async with ses.get(leet_code_api_url) as resp:

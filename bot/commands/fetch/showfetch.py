@@ -1,7 +1,4 @@
-from io import BytesIO
-
 import discord
-from PIL import Image
 
 from bot.base import BaseCommand
 from bot.config import Config, Embed
