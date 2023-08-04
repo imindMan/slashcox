@@ -60,15 +60,16 @@ class Client(discord.Client):
         eventManager = EventManager(db)
         eventManager.load_all(["bot", "events"])
         await eventManager.register_all(self)
-
-        commandManager = CommandManager(self.tree, db)
-        commandManager.load_all(["bot", "commands"])
-        await commandManager.register_all(self)
-
+        
         taskManager = TasksManager(db)
         taskManager.load_all(["bot", "tasks"])
         await taskManager.register_all(self)
 
+        commandManager = CommandManager(self.tree, db)
+        commandManager.load_all(["bot", "commands"])
+        await commandManager.register_all(self)
+ 
+        
 
 # The tree
 class Tree(app_commands.CommandTree):
