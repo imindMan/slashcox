@@ -144,6 +144,10 @@ class Config:
         getenv("SLASHCOX_SERVER_ID", "1032277950416035930")
     )  # imindworld server id
 
+    minecraft_url: str = os.getenv("MINECRAFT_URL", "minecraft.virbos.xyz")
+    minecraft_port: int = os.getenv("MINECRAFT_PORT", 25565)
+
+
 
 ## EMBED STUFF ##
 

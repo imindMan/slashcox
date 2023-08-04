@@ -180,3 +180,25 @@ class CommandManager(BaseManager):
             command = obj(client, self, self.db)
             self.tree.register(command)
         await self.tree.sync(guild=discord.Object(id=Config.server_id))
+
+class TasksManager(BaseManager):
+    """Manager for discord events.
+    The on_ready event is already registered by default and can't be changed with this.
+    To create a event, create a file in bot/events and have a class in it called Event,
+    that extends bot.base.BaseEvent
+    It needs to have a name attribute and an execute method.
+    """
+
+    def __init__(self, db) -> None:
+        self.modules = {}
+        self.db = db
+
+    def load_module(self, path: str):
+        task = __import__(path, globals(), locals(), ["TaskLoop"], 0).TaskLoop
+        return task
+
+    async def register_all(self, client: "ClientType"):
+        for obj in self.modules.values():
+            task = obj(client, self, self.db)
+            task.execute.start()
+            

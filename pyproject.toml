@@ -18,7 +18,8 @@ orjson = "^3.8.5"
 aiomysql = "^0.1.1"
 aiosqlite = "0.18.0"
 python-dotenv = "0.21.0"
-prettytable = "^3.8.0"
+yarl = "^1.9.2"
+mcstatus = "^11.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^22.12.0"

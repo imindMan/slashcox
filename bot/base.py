@@ -13,7 +13,7 @@ from discord import app_commands
 
 from .config import CREATE_STATEMENTS, Config, Embed
 from .logger import Logger
-from .manager import CommandManager, EventManager
+from .manager import CommandManager, EventManager, TasksManager
 from .sql import SQLParser
 
 ### IMPORTANT VARIABLE ###
@@ -64,6 +64,10 @@ class Client(discord.Client):
         commandManager = CommandManager(self.tree, db)
         commandManager.load_all(["bot", "commands"])
         await commandManager.register_all(self)
+
+        taskManager = TasksManager(db)
+        taskManager.load_all(["bot", "tasks"])
+        await taskManager.register_all(self)
 
 
 # The tree
@@ -146,3 +150,19 @@ class BaseCommand:
 
     def check_permissions(self, interaction) -> bool:
         return True
+
+class BaseTask:
+
+    name: str = ""
+    logger = Logger()
+
+    def __init__(self, client: Client, manager: EventManager, db) -> None:
+        self.bot = client
+        self.manager = manager
+        self.db = db
+
+    @abstractmethod
+    async def execute(self) -> None:
+        raise NotImplementedError("Execute method is required")
+
+
