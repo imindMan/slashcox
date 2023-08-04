@@ -12,6 +12,7 @@ class TaskLoop(BaseTask):
 
     @tasks.loop(minutes=2)
     async def execute(self):
+        print("I got the text")
         async with aiohttp.ClientSession() as session:
             async with session.get(
                 f"https://www.youtube.com/feeds/videos.xml?channel_id={Config.channel_id}"
