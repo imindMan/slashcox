@@ -148,7 +148,6 @@ class Config:
     minecraft_port: int = os.getenv("MINECRAFT_PORT", 25565)
 
 
-
 ## EMBED STUFF ##
 
 

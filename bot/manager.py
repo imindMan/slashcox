@@ -181,6 +181,7 @@ class CommandManager(BaseManager):
             self.tree.register(command)
         await self.tree.sync(guild=discord.Object(id=Config.server_id))
 
+
 class TasksManager(BaseManager):
     """Manager for discord events.
     The on_ready event is already registered by default and can't be changed with this.
@@ -201,4 +202,3 @@ class TasksManager(BaseManager):
         for obj in self.modules.values():
             task = obj(client, self, self.db)
             task.execute.start()
-            

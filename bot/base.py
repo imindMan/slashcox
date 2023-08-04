@@ -151,8 +151,8 @@ class BaseCommand:
     def check_permissions(self, interaction) -> bool:
         return True
 
-class BaseTask:
 
+class BaseTask:
     name: str = ""
     logger = Logger()
 
@@ -164,5 +164,3 @@ class BaseTask:
     @abstractmethod
     async def execute(self) -> None:
         raise NotImplementedError("Execute method is required")
-
-
