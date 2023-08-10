@@ -9,6 +9,7 @@ from bot.config import Config, Embed
 
 class TaskLoop(BaseTask):
     """A discord Task instance."""
+
     name = "youtube"
 
     @tasks.loop(minutes=2)
