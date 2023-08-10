@@ -19,3 +19,6 @@ class cmd(BaseCommand):
         )
         embed = Embed(title="Tag removed", description=f"The tag '{name}' was removed")
         await interaction.response.send_message(embed=embed)
+    def check_permissions(self, interaction) -> bool:
+        # Check for a specific role in the member
+        return any([i.id == Config().mod_role_id for i in interaction.user.roles])
