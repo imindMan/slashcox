@@ -4,6 +4,7 @@ from bot.base import BaseTask
 
 
 class TaskLoop(BaseTask):
+    name = "check_members"
     previous_member_count = None  # best way to not fetching db every minutes
 
     @loop(minutes=1)

@@ -10,6 +10,7 @@ from bot.config import Config, Embed
 
 class TaskLoop(BaseTask):
     """A discord Task instance."""
+    name = "reminders"
 
     @tasks.loop(seconds=30)
     async def execute(self):

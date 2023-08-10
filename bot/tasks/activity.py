@@ -7,6 +7,7 @@ from bot.config import Config
 
 
 class TaskLoop(BaseTask):
+    name = "activity"
     current = 0
 
     @loop(minutes=10)
