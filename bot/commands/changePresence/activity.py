@@ -1,6 +1,7 @@
+from typing import Literal
+
 import discord
 
-from typing import Literal
 from bot.base import BaseCommand
 from bot.config import Config, Embed
 
@@ -11,7 +12,12 @@ class cmd(BaseCommand):
     name = "activity"
     description = "Changes the bot's activity."
 
-    async def execute(self, interaction, _type:Literal["playing", "watching", "listening"], message:str) -> None:
+    async def execute(
+        self,
+        interaction,
+        _type: Literal["playing", "watching", "listening"],
+        message: str,
+    ) -> None:
         match _type:
             case "playing":
                 activityType = discord.ActivityType.playing
@@ -19,7 +25,7 @@ class cmd(BaseCommand):
                 activityType = discord.ActivityType.watching
             case "listening":
                 activityType = discord.ActivityType.listening
-            
+
         activity = discord.Activity(type=activityType, name=message)
         self.bot.current_activity = activity
         await self.bot.change_presence(
